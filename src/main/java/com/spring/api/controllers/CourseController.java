@@ -29,12 +29,4 @@ public class CourseController {
 	public CourseDto findById(@PathVariable Long id) {
 		return service.findById(id);
 	}
-	
-	@GetMapping(value = "/students")
-	public List<StudentDto> findByCourse(@RequestParam(value = "id")Long id) {
-		if(!id.equals(null)) {
-		return service.findByCourse(id);
-	} 
-	return null;
-	}
 }

@@ -4,7 +4,9 @@ import java.util.Objects;
 
 import com.spring.api.dto.StudentDto;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,11 +20,12 @@ public class Student {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "student_id")
 	private Long id;
 	private String name;
 
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "course_id")
 	private Course course;
 

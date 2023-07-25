@@ -11,6 +11,7 @@ public class CourseDto {
 
 	private Long id;
 	private String type;
+	@JsonIgnore
 	private List<StudentDto> students = new ArrayList<>();
 
 	public CourseDto(Long id, String name) {
@@ -39,7 +40,6 @@ public class CourseDto {
 		this.type = type;
 	}
 
-	@JsonIgnore
 	public List<StudentDto> getStudents() {
 		return students;
 	}

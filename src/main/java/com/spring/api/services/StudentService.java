@@ -1,10 +1,12 @@
 package com.spring.api.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.api.dto.CourseDto;
 import com.spring.api.dto.StudentDto;
 import com.spring.api.models.Student;
 import com.spring.api.repositories.StudentRepository;
@@ -27,4 +29,21 @@ public class StudentService {
 		StudentDto dto = new StudentDto(student);
 		return dto;
 	}
+	
+	
+	public List<StudentDto> findByCourse(Long id){
+		
+		List<Student> course = repository.findByCourse(id);
+		List<StudentDto> dto = course.stream().map(x -> new StudentDto(x)).toList();
+		System.out.println(dto);
+		for(StudentDto c : dto) {
+			if(c.getId() == id) {
+				List<StudentDto> response = new ArrayList<>();
+				response.add(c);
+				return response;
+			}
+		}
+		return null;
+	}
+
 }

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.spring.api.dto.CourseDto;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,9 +23,6 @@ public class Course {
 	private Long id;
 	private String type;
 	
-	
-	
-	@JsonIgnore
 	@OneToMany(mappedBy = "course")
 	private List<Student> students = new ArrayList<>();
 
@@ -58,6 +55,7 @@ public class Course {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
 
 	public List<Student> getStudents() {
 		return students;
@@ -79,6 +77,7 @@ public class Course {
 		Course other = (Course) obj;
 		return Objects.equals(id, other.id);
 	}
+
 
 	@Override
 	public String toString() {

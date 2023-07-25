@@ -25,7 +25,7 @@ public class TestConfig implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 
-		Course c1 = new Course(null, "Math");
+		Course c1 = new Course(null, "Math"	);
 		Course c2 = new Course(null, "History");
 		
 		Student s1 = new Student(null, "Raphael", c1);
@@ -33,7 +33,6 @@ public class TestConfig implements CommandLineRunner {
 		Student s3 = new Student(null, "Pablo", c2);
 		Student s4 = new Student(null, "Guilherme", c2);
 		
-	
 		courseRepository.saveAll(Arrays.asList(c1, c2));
 
 		studentRepository.saveAll(Arrays.asList(s1, s2, s3, s4));

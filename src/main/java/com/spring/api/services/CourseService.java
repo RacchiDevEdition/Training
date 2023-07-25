@@ -1,5 +1,6 @@
 package com.spring.api.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +31,5 @@ public class CourseService {
 
 	//method yet to work with dto
 	
-	public List<StudentDto> findByCourse(Long id){
-		List<Course> course = repository.findByCourse(id);
-		List<CourseDto> dto = course.stream().map(x -> new CourseDto(x)).toList();
-		for(CourseDto c : dto) {
-			if(c.getId() == id) {
-				return c.getStudents();
-			}
-		}
-		return null;
-	}
 
 }
