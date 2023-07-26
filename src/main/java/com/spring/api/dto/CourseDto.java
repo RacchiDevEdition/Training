@@ -13,6 +13,8 @@ public class CourseDto {
 	private String type;
 	@JsonIgnore
 	private List<StudentDto> students = new ArrayList<>();
+	@JsonIgnore
+	private List<TeacherDto> teachers = new ArrayList<>();
 
 	public CourseDto(Long id, String name) {
 		this.id = id;
@@ -42,6 +44,10 @@ public class CourseDto {
 
 	public List<StudentDto> getStudents() {
 		return students;
+	}
+	
+	public List<TeacherDto> getTeachers() {
+		return teachers;
 	}
 
 	@Override

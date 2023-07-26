@@ -29,7 +29,5 @@ public class CourseService {
 		return dto;
 	}
 
-	//method yet to work with dto
-	
 
 }

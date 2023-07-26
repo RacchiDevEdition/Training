@@ -9,8 +9,10 @@ import org.springframework.context.annotation.Profile;
 
 import com.spring.api.models.Course;
 import com.spring.api.models.Student;
+import com.spring.api.models.Teacher;
 import com.spring.api.repositories.CourseRepository;
 import com.spring.api.repositories.StudentRepository;
+import com.spring.api.repositories.TeacherRepository;
 
 @Configuration
 @Profile("test")
@@ -21,18 +23,34 @@ public class TestConfig implements CommandLineRunner {
 	@Autowired
 	private StudentRepository studentRepository;
 
+	@Autowired
+	private TeacherRepository teacherRepository;
+	
 	@Override
 	public void run(String... args) throws Exception {
 		
 
 		Course c1 = new Course(null, "Math"	);
-		Course c2 = new Course(null, "History");
+		Course c2 = new Course(null, "Software Enginnering");
 		
 		Student s1 = new Student(null, "Raphael", c1);
 		Student s2 = new Student(null, "João", c1);
 		Student s3 = new Student(null, "Pablo", c2);
 		Student s4 = new Student(null, "Guilherme", c2);
 		
+		Teacher t1 = new Teacher(null, "Jared", "Database");
+		Teacher t2 = new Teacher(null, "Akita", "Algorithms");
+		Teacher t3 = new Teacher(null, "John", "Statistics");
+		Teacher t4 = new Teacher(null, "Andrew", "Geometry");
+		
+		c1.getTeachers().add(t4);
+		c1.getTeachers().add(t3);
+		c2.getTeachers().add(t2);
+		c2.getTeachers().add(t1);
+		c2.getTeachers().add(t3);
+		
+	
+		teacherRepository.saveAll(Arrays.asList(t1, t2, t3, t4));
 		courseRepository.saveAll(Arrays.asList(c1, c2));
 
 		studentRepository.saveAll(Arrays.asList(s1, s2, s3, s4));

@@ -35,12 +35,9 @@ public class StudentService {
 		
 		List<Student> course = repository.findByCourse(id);
 		List<StudentDto> dto = course.stream().map(x -> new StudentDto(x)).toList();
-		System.out.println(dto);
 		for(StudentDto c : dto) {
-			if(c.getId() == id) {
-				List<StudentDto> response = new ArrayList<>();
-				response.add(c);
-				return response;
+			if(id.equals(c.getCourse().getId())) {
+				return dto;
 			}
 		}
 		return null;

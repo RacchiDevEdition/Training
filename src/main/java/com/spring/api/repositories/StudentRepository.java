@@ -8,6 +8,6 @@ import com.spring.api.models.Student;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
-	@Query(nativeQuery = true, value = "SELECT STUDENT_ID FROM TB_STUDENT INNER JOIN TB_COURSE WHERE COURSE_ID = ?")
-	List<Student> findByCourse( Long id);
+	@Query(nativeQuery = true, value = "SELECT * FROM TB_STUDENT JOIN TB_COURSE ON ID = COURSE_ID WHERE ID = ?")	
+	List<Student> findByCourse (Long id);
 }
