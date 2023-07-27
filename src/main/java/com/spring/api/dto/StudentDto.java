@@ -1,5 +1,7 @@
 package com.spring.api.dto;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.spring.api.models.Student;
@@ -9,8 +11,8 @@ public class StudentDto {
 	private Long id;
 	private String name;
 	private CourseDto course;
-	
-	
+	private List<TestDto> tests = new ArrayList<>();
+
 	public StudentDto(Long id, String name, CourseDto course) {
 		this.id = id;
 		this.name = name;
@@ -22,46 +24,43 @@ public class StudentDto {
 		this.name = student.getName();
 		this.course = new CourseDto(student.getCourse());
 	}
-	public StudentDto() {
-		
-	}
 
+	public StudentDto() {
+
+	}
 
 	public Long getId() {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getName() {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public CourseDto getCourse() {
 		return course;
 	}
 
-
 	public void setCourse(CourseDto course) {
 		this.course = course;
 	}
 
+	public List<TestDto> getTests() {
+		return tests;
+	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -75,12 +74,9 @@ public class StudentDto {
 		return Objects.equals(id, other.id);
 	}
 
-
 	@Override
 	public String toString() {
 		return "StudentDto [id=" + id + ", name=" + name + ", course=" + course + "]";
 	}
-	
-	
-	
+
 }

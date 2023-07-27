@@ -1,5 +1,7 @@
 package com.spring.api.models;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.spring.api.dto.StudentDto;
@@ -12,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -28,6 +31,9 @@ public class Student {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "course_id")
 	private Course course;
+	
+	@OneToMany(mappedBy = "id.student")
+	private List<Test> test = new ArrayList<>();	
 
 	public Student(Long id, String name, Course course) {
 		this.id = id;
@@ -63,6 +69,11 @@ public class Student {
 
 	public Course getCourse() {
 		return course;
+	}
+
+	
+	public List<Test> getTest() {
+		return test;
 	}
 
 	@Override

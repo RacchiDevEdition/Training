@@ -1,7 +1,10 @@
 package com.spring.api.models;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import com.spring.api.dto.TeacherDto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -9,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,8 +24,12 @@ public class Teacher {
 	private Long id;
 	private String name;
 	private String subject;
+	
 	@ManyToMany(mappedBy = "teachers", fetch = FetchType.LAZY)
-	private List<Course> courses;
+	private List<Course> courses = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "id.teacher")
+	private List<Test> test = new ArrayList<>();		
 
 	public Teacher(Long id, String name, String subject) {
 		super();
@@ -31,6 +39,12 @@ public class Teacher {
 	}
 
 	public Teacher() {
+	}
+	
+	public Teacher(TeacherDto teacher) {
+		this.id = teacher.getId();
+		this.name = teacher.getName();
+		this.subject = teacher.getSubject();
 	}
 
 	public Long getId() {
@@ -59,6 +73,11 @@ public class Teacher {
 
 	public List<Course> getCourses() {
 		return courses;
+	}
+
+	
+	public List<Test> getTest() {
+		return test;
 	}
 
 	@Override

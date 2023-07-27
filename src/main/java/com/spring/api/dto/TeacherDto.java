@@ -3,7 +3,6 @@ package com.spring.api.dto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 import com.spring.api.models.Teacher;
 
 public class TeacherDto {
@@ -12,6 +11,8 @@ public class TeacherDto {
 	private String name;
 	private String subject;
 	private List<CourseDto> courses = new ArrayList<>();
+	private List<TestDto> tests = new ArrayList<>();
+
 
 	public TeacherDto(Teacher teacher) {
 		this.id = teacher.getId();
@@ -52,6 +53,11 @@ public class TeacherDto {
 		return courses;
 	}
 
+	public List<TestDto> getTests() {
+		return tests;
+	}
+
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
