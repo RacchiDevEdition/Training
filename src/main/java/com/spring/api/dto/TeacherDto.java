@@ -3,6 +3,8 @@ package com.spring.api.dto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.spring.api.models.Teacher;
 
 public class TeacherDto {
@@ -11,6 +13,7 @@ public class TeacherDto {
 	private String name;
 	private String subject;
 	private List<CourseDto> courses = new ArrayList<>();
+	@JsonIgnore
 	private List<TestDto> tests = new ArrayList<>();
 
 

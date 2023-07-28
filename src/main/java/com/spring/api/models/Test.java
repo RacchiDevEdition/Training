@@ -2,21 +2,41 @@ package com.spring.api.models;
 
 import java.util.Objects;
 
-import com.spring.api.pk.TestPk;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.spring.api.enums.CourseEnum;
+import com.spring.api.repositories.TeacherRepository;
 
-import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_test")
 public class Test {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "test_id")
+	private Long id;
 
-	@EmbeddedId
-	private TestPk id = new TestPk();
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "teacher_id")
+	private Teacher teacher;
+
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "student_id")
+	private Student student;
+
+	@Column(name = "grade")
 	private Double grade;
 	private String subject;
 
@@ -27,25 +47,25 @@ public class Test {
 	public Test(Double grade, String subject, Teacher teacher, Student student) {
 		super();
 		this.grade = grade;
-		this.subject = subject;
-		id.setTeacher(teacher);
-		id.setStudent(student);
+		this.subject = teacher.getSubject();
+		this.teacher = teacher;
+		this.student = student;
 	}
 
 	public Teacher getTeacher() {
-		return id.getTeacher();
+		return teacher;
 	}
 
 	public void setTeacher(Teacher teacher) {
-		id.setTeacher(teacher);
+		this.teacher = teacher;
 	}
 
 	public Student getStudent() {
-		return id.getStudent();
+		return student;
 	}
 
 	public void setStudent(Student student) {
-		id.setStudent(student);
+		this.student = student;
 	}
 
 	public Double getGrade() {
@@ -57,11 +77,11 @@ public class Test {
 	}
 
 	public String getSubject() {
-		return id.getTeacher().getSubject();
+		return teacher.getSubject();
 	}
 
 	public void setSubject(String subject) {
-		this.subject = id.getTeacher().getSubject();
+		teacher.setSubject(subject);
 	}
 
 	@Override
@@ -82,6 +102,7 @@ public class Test {
 	}
 
 	@Override
+	@JsonIgnore
 	public String toString() {
 		return "Test [id=" + id + ", grade=" + grade + ", subject=" + subject + "]";
 	}

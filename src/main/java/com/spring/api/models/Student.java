@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.spring.api.dto.StudentDto;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -28,17 +30,25 @@ public class Student {
 	private String name;
 
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "course_id")
 	private Course course;
 	
-	@OneToMany(mappedBy = "id.student")
+	
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.PERSIST)
+	@JoinColumn(name = "classRoom_id")
+	private ClassRoom classRoom;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "student")
 	private List<Test> test = new ArrayList<>();	
 
-	public Student(Long id, String name, Course course) {
+	public Student(Long id, String name, Course course, ClassRoom classRoom) {
 		this.id = id;
 		this.name = name;
 		this.course = course;
+		this.classRoom = classRoom;
 	}
 
 	public Student(StudentDto dto) {
@@ -76,6 +86,15 @@ public class Student {
 		return test;
 	}
 
+	
+	public ClassRoom getClassRoom() {
+		return classRoom;
+	}
+
+
+	public void setClassRoom(ClassRoom classRoom) {
+		this.classRoom = classRoom;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

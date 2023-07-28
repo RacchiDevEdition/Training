@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.spring.api.models.Student;
 
 public class StudentDto {
@@ -11,6 +12,7 @@ public class StudentDto {
 	private Long id;
 	private String name;
 	private CourseDto course;
+	@JsonIgnore
 	private List<TestDto> tests = new ArrayList<>();
 
 	public StudentDto(Long id, String name, CourseDto course) {

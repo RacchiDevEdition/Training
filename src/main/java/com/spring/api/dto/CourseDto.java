@@ -5,25 +5,31 @@ import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.spring.api.enums.CourseEnum;
 import com.spring.api.models.Course;
 
 public class CourseDto {
 
 	private Long id;
-	private String type;
+	private String name;
 	@JsonIgnore
 	private List<StudentDto> students = new ArrayList<>();
 	@JsonIgnore
 	private List<TeacherDto> teachers = new ArrayList<>();
 
-	public CourseDto(Long id, String name) {
+	private Integer courseType;
+
+	public CourseDto(Long id, String name, CourseEnum courseType) {
 		this.id = id;
-		this.type = name;
+		this.name = name;
+		setCourseType(courseType);
+
 	}
 
 	public CourseDto(Course course) {
 		this.id = course.getId();
-		this.type = course.getType();
+		this.name = course.getName();
+		this.courseType = course.getCourseType().getCode();
 	}
 
 	public Long getId() {
@@ -34,20 +40,30 @@ public class CourseDto {
 		this.id = id;
 	}
 
-	public String getType() {
-		return type;
+	public String getName() {
+		return name;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setType(String name) {
+		this.name = name;
 	}
 
 	public List<StudentDto> getStudents() {
 		return students;
 	}
-	
+
 	public List<TeacherDto> getTeachers() {
 		return teachers;
+	}
+
+	public CourseEnum getCourseTypeDto() {
+		return CourseEnum.valueOf(courseType);
+	}
+
+	public void setCourseType(CourseEnum courseType) {
+		if (courseType != null) {
+			this.courseType = courseType.getCode();
+		}
 	}
 
 	@Override
@@ -69,9 +85,7 @@ public class CourseDto {
 
 	@Override
 	public String toString() {
-		return "CourseDto [id=" + id + ", type=" + type + ", students=" + students + "]";
+		return "CourseDto [id=" + id + ", name=" + name + ", students=" + students + "]";
 	}
-	
-	
 
 }

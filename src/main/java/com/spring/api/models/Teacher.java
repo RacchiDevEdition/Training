@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.spring.api.dto.TeacherDto;
 
 import jakarta.persistence.Entity;
@@ -28,7 +29,13 @@ public class Teacher {
 	@ManyToMany(mappedBy = "teachers", fetch = FetchType.LAZY)
 	private List<Course> courses = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "id.teacher")
+	@JsonIgnore
+	@ManyToMany(mappedBy = "teachers", fetch = FetchType.LAZY)
+	private List<ClassRoom> classes = new ArrayList<>();
+	
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "teacher")
 	private List<Test> test = new ArrayList<>();		
 
 	public Teacher(Long id, String name, String subject) {
@@ -78,6 +85,11 @@ public class Teacher {
 	
 	public List<Test> getTest() {
 		return test;
+	}
+
+	@JsonIgnore
+	public List<ClassRoom> getClasses() {
+		return classes;
 	}
 
 	@Override
