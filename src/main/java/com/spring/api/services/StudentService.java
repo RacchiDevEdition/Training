@@ -43,4 +43,12 @@ public class StudentService {
 		return null;
 	}
 
+	public StudentDto createStudent(StudentDto student) {
+		Student newStudent = new Student(student);
+		newStudent = repository.save(newStudent);
+		StudentDto response = new StudentDto(newStudent);
+		return response;
+
+	}
+
 }

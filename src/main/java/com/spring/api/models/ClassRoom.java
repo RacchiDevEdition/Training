@@ -3,7 +3,7 @@ package com.spring.api.models;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.spring.api.dto.ClassRoomDto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,6 +46,14 @@ public class ClassRoom {
 
 	public ClassRoom() {
 
+	}
+	
+	public ClassRoom(ClassRoomDto classRoom) {
+		this.id = classRoom.getId();
+		this.name = classRoom.getName();
+		this.teachers = classRoom.getTeachers().stream().map(x -> new Teacher(x)).toList();
+		this.students = classRoom.getStudents().stream().map(x -> new Student(x)).toList();
+	
 	}
 
 	public Long getId() {

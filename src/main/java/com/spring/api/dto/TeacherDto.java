@@ -15,6 +15,9 @@ public class TeacherDto {
 	private List<CourseDto> courses = new ArrayList<>();
 	@JsonIgnore
 	private List<TestDto> tests = new ArrayList<>();
+	@JsonIgnore
+	private List<ClassRoomDto> classRooms = new ArrayList<>();
+
 
 
 	public TeacherDto(Teacher teacher) {
@@ -60,7 +63,10 @@ public class TeacherDto {
 		return tests;
 	}
 
-	
+	public List<ClassRoomDto> getClassRooms() {
+		return classRooms;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

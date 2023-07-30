@@ -52,7 +52,6 @@ public class Course {
 	public Course(CourseDto course) {
 		this.id = course.getId();
 		this.name = course.getName();
-		this.courseEnum = course.getCourseTypeDto().getCode();
 	}
 
 	public Long getId() {

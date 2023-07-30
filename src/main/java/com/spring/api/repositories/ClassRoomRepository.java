@@ -10,7 +10,7 @@ import com.spring.api.models.ClassRoom;
 public interface ClassRoomRepository extends JpaRepository<ClassRoom, Long> {
 	
 	//gettind duplicated values
-	@Query(nativeQuery = true, value = "SELECT * FROM TB_CLASSROOM_TEACHER JOIN TB_TEACHER ON ID WHERE TEACHER_ID = ?")
+	@Query(nativeQuery = true, value = "SELECT * FROM TB_CLASSROOM_TEACHER JOIN TB_TEACHER ON ID = TEACHER_ID WHERE TEACHER_ID = ?")
 	List<ClassRoom> findTeacherByClass(Long id);
 	
 }

@@ -14,11 +14,14 @@ public class StudentDto {
 	private CourseDto course;
 	@JsonIgnore
 	private List<TestDto> tests = new ArrayList<>();
+	@JsonIgnore
+	private ClassRoomDto classRoom;
 
-	public StudentDto(Long id, String name, CourseDto course) {
+	public StudentDto(Long id, String name, CourseDto course, ClassRoomDto classRoom) {
 		this.id = id;
 		this.name = name;
 		this.course = course;
+		this.classRoom = classRoom;
 	}
 
 	public StudentDto(Student student) {
@@ -45,6 +48,14 @@ public class StudentDto {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public ClassRoomDto getClassRoom() {
+		return classRoom;
+	}
+
+	public void setClassRoom(ClassRoomDto classRoom) {
+		this.classRoom = classRoom;
 	}
 
 	public CourseDto getCourse() {

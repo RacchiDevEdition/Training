@@ -1,14 +1,12 @@
 package com.spring.api.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.api.dto.TeacherDto;
+import com.spring.api.dto.ClassRoomDto;
 import com.spring.api.models.ClassRoom;
-import com.spring.api.models.Teacher;
 import com.spring.api.repositories.ClassRoomRepository;
 
 @Service
@@ -17,22 +15,23 @@ public class ClassRoomService {
 	@Autowired
 	private ClassRoomRepository repository;
 
-	public List<ClassRoom> findAll() {
+	public List<ClassRoomDto> findAll() {
 		List<ClassRoom> tests = repository.findAll();
-		// List<TestDto> dto = tests.stream().map(x -> new TestDto(x)).toList();
-		return tests;
+		List<ClassRoomDto> dto = tests.stream().map(x -> new ClassRoomDto(x)).toList();
+		return dto;
 	}
 
-	public ClassRoom findById(Long id) {
+	public ClassRoomDto findById(Long id) {
 		ClassRoom test = repository.findById(id).get();
-		// TestDto dto = new TestDto(test);
-		return test;
+		ClassRoomDto dto = new ClassRoomDto(test);
+		return dto;
 
 	}
 
-	public List<ClassRoom> findTeacherByClassId(Long id) {
+	public List<ClassRoomDto> findTeacherByClassId(Long id) {
 		List<ClassRoom> classes = repository.findTeacherByClass(id);
-		return classes;
+		List<ClassRoomDto> dto = classes.stream().map(x -> new ClassRoomDto(x)).toList();
+		return dto;
 	}
 
 	/*

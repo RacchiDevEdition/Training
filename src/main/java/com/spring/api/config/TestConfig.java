@@ -56,8 +56,12 @@ public class TestConfig implements CommandLineRunner {
 		Teacher t3 = new Teacher(null, "John", "Statistics");
 		Teacher t4 = new Teacher(null, "Andrew", "Geometry");
 		
-		List<Teacher> listT = Arrays.asList(t1, t2);
+		List<Teacher> listT = Arrays.asList(t1, t2, t3);
 		List<Student> listS = Arrays.asList(s3,s4);
+		List<Teacher> listT2 = Arrays.asList(t3, t4);
+		List<Student> listS2 = Arrays.asList(s1, s2);
+
+
 		
 		Test test1 = new Test(10.0, null, t4, s4);
 		Test test2 = new Test(6.0, null, t3, s3);
@@ -66,9 +70,12 @@ public class TestConfig implements CommandLineRunner {
 		Test test5 = new Test(8.0, null, t4, s3);
 		
 	
-		ClassRoom cr1 = new ClassRoom(null, 's', listT, listS);
+		ClassRoom cr1 = new ClassRoom(null, 'A', listT, listS);
+		ClassRoom cr2 = new ClassRoom(null, 'B', listT2, listS2);
 		s3.setClassRoom(cr1);
 		s4.setClassRoom(cr1);
+		s1.setClassRoom(cr2);
+		s2.setClassRoom(cr2);
 		
 	
 
@@ -88,13 +95,15 @@ public class TestConfig implements CommandLineRunner {
 		
 		t1.getClasses().add(cr1);
 		t2.getClasses().add(cr1);
+		t3.getClasses().add(cr2);
+		t3.getClasses().add(cr2);
 		
 	
 		teacherRepository.saveAll(Arrays.asList(t1, t2, t3, t4));
 		courseRepository.saveAll(Arrays.asList(c1, c2));
 		studentRepository.saveAll(Arrays.asList(s1, s2, s3, s4));
 		testRepository.saveAll(Arrays.asList(test1,test2,test3,test4,test5));
-		classRepository.save(cr1);
+		classRepository.saveAll(Arrays.asList(cr1, cr2));
 
 	}
 }
